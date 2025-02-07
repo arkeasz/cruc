@@ -1,43 +1,16 @@
-import mongoose from "mongoose";
 import express from 'express';
 import * as config from './config/index.js';
+import connectDB from "./config/db.js";
+import router from "./routes/index.js";
 
-mongoose.connect('mongodb://mongo:VUfYjhAelgNUriCijNJbQzFlXgkSZqNv@roundhouse.proxy.rlwy.net:25482');
+const app = express();
+const PORT = config.PORT || 3000;
 
-const Cat = mongoose.model('Cat', { name: String });
-p
-const kitty = new Cat({ name: 'Zildjian' });
-kitty.save().then(() => console.log('meow'));
+connectDB();
 
+app.use(express.json());
+app.use('/api/tasks', router);
 
-// import express from 'express';
-// import * as config from './config/index.js';
-
-// const app = express();
-
-// fetch("http://roundhouse.proxy.rlwy.net:25482/")
-//   .then(response => response.text()) // O .json() si devuelve JSON
-//   .then(data => console.log(data))
-//   .catch(error => console.error("Error:", error));
-
-
-// app.get('/', (req, res) =>  {
-//     res.send('Hello, world!');
-// })
-
-// app.listen(config.PORT, () =>   {
-//     console.log(`Example app listening on port ${config.PORT}`);
-// })
-
-// app.post('/', (req, res) => {
-//     res.send('Got a POST request')
-//     console.log(req)
-// })
-
-// app.put('/user', (req, res) => {
-//     res.send('Got a PUT request at /user');
-// })
-
-// app.delete('/user', (req, res) => {
-//     res.send('Got a DELETE request at /user')
-// })
+app.listen(PORT, () =>   {
+    console.log(`🚀 Server running at http://localhost:${PORT}`);
+})
