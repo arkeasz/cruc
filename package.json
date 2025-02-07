@@ -1,0 +1,26 @@
+{
+  "name": "cruc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start:client": "cd client && npm run dev",
+    "start:api": "cd api && npm run watch",
+    "start":  "concurrently \"npm run start:client\" \"npm run start:api\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arkeasz/cruc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arkeasz/cruc/issues"
+  },
+  "homepage": "https://github.com/arkeasz/cruc#readme",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
