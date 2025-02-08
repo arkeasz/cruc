@@ -1,0 +1,38 @@
+name: Deploy Client to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Cambia si tu branch principal tiene otro nombre
+  workflow_dispatch: # Permite ejecución manual
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: |
+          cd client
+          npm install
+
+      - name: Build project
+        run: |
+          cd client
+          npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: client/dist 
