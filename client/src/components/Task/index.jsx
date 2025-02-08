@@ -4,11 +4,11 @@ function Task({title, description, id}) {
         <div>
           <p className="title">
             {title}
-
           </p>
           <p>
             {description}
           </p>
+      
         </div>
       </>
     )
