@@ -4,14 +4,16 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --env-file=.env main.js",
-    "watch": "nodemon --exec \"npm run start\""
+    "start": "node main.js",
+    "dev": "node --env-file=.env main.js",
+    "watch": "nodemon --exec \"npm run dev\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^5.0",
     "mongoose": "^8.10.0"
   },
