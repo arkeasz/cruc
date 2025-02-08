@@ -2,14 +2,15 @@
     "version": 2,
     "builds": [
         {
-            "src": "main.js",
+            "src": "*.js",
             "use": "@vercel/node"
         }
     ],
     "rewrites": [
         {
             "source": "/(.*)",
-            "destination": "/"
+            "destination": "/",
+            "methods": ["GET", "POST", "OPTIONS", "UPDATE", "PUT", "DELETE"]
         }
     ]
 }
