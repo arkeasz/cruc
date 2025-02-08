@@ -1,0 +1,1 @@
+.task{--padding: 4rem;background-color:#f7cfd8;color:#111;width:calc(80% - var(--padding));padding:1rem var(--padding);height:auto;border-radius:10px}.tasks{display:flex;flex-direction:column;gap:1rem;align-items:center}
