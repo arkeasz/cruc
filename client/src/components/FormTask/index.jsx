@@ -1,7 +1,14 @@
+import './index.css'
+
 function FormTask({title, description, setTitle, setDescription, addTask}) {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        addTask();
+    };
+
     return (
         <>
-            <form>
+            <form className='form' onSubmit={handleSubmit}>
                 <input
                 type="text"
                 placeholder="Title"
@@ -14,7 +21,7 @@ function FormTask({title, description, setTitle, setDescription, addTask}) {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 />
-                <button onClick={addTask}>➕ Agregar</button>
+                <button onClick={handleSubmit}>Post</button>
           </form>
         </>
     )

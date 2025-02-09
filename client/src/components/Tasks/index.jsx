@@ -31,7 +31,7 @@ function Tasks()  {
     }, []);
 
     const addTask = async () => {
-      if (!title || !description) return alert("Title and description are required");
+      if (!title) return;
       try {
         const response = await fetch(`${API_URL}`, {
           method: "POST",
@@ -42,9 +42,12 @@ function Tasks()  {
         if (!response.ok)  {
           throw new Error("Error to post task");
         }
-
         const newTask = await response.json();
-        setData((prevData) => [...prevData, newTask])
+
+        setData((prevData) => {
+          const exists = prevData.some((task) => task._id === newTask._id);
+          return exists ? prevData : [...prevData, newTask];
+        });
         setTitle("");
         setDescription("");
       } catch (err) {
@@ -68,6 +71,31 @@ function Tasks()  {
       }
     };
 
+    const updateTask = async (id, updateData) =>  {
+      try {
+        const response = await fetch(`${API_URL}/${id}`,  {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(updateData)
+        });
+
+        if (!response.ok) {
+          throw new Error("Error al actualizar la tarea");
+        }
+
+        const updTask = await response.json();
+        setData(prevData =>
+          prevData.map(task =>
+            task._id === id ? { ...task, ...updateData } : task
+          )
+        );
+      } catch (err) {
+        console.error("Error", err.message)
+      }
+    };
+
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
@@ -84,14 +112,17 @@ function Tasks()  {
           <div className='tasks'>
               {
                 data.length === 0
-                  ? (<p>No hay tareas disponibles</p>)
+                  ? (<p className='dtask'>No hay tareas disponibles</p>)
                   : (
-                      data.map((task) => (
+                      data.slice().reverse().map((task) => (
+                        task &&
                           <Task
+                            key={task._id}
                             title={task.title}
                             description={task.description}
                             id={task._id}
                             onDelete={deleteTask}
+                            onUpdate={updateTask}
                           />
                         )
                       )
