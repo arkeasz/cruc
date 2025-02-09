@@ -12,20 +12,47 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.post('/', async (req, res) => {
+router.patch('/:id', async (req, res) =>    {
     try {
-        const {title, description, userId} = req.body;
+        const updatedTask = await Task.findByIdAndUpdate(
+            req.params.id,
+            { $set: req.body },
+            { new: true }
+        );
 
-        if (!title || !description)   {
-            return res.status(400).json({ message: "Title and userId are required" });
+        if (!updatedTask)   {
+            return res.status(400).json({ message: "Task not found" });
         }
-        const newTask = new Task({ title, description, userId });
+
+        res.json(updatedTask)
+    } catch (err)   {
+        res.status(500).json({ message: err.message })
+    }
+})
+
+router.post("/", async (req, res) => {
+    try {
+        const { title, description, userId, status = "pending", priority = "medium", tags = [] } = req.body;
+
+        if (!title || !description) {
+            return res.status(400).json({ message: "Title and description are required" });
+        }
+
+        const newTask = new Task({
+            title,
+            description,
+            userId,
+            status,
+            priority,
+            tags
+        });
+
         await newTask.save();
         res.status(201).json(newTask);
     } catch (error) {
-        res.status(500).json({ message: error.message })
+        res.status(500).json({ message: error.message });
     }
-})
+});
 
 router.delete('/:id', async (req, res) =>   {
     try {

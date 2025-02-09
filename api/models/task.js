@@ -20,8 +20,14 @@ const TaskSchema = new mongoose.Schema({
         enum: ["low", "medium", "high"],
         default: "medium"
     },
-    dueDate: Date,
-    tags: [{ type: String }],
+    dueDate: {
+        type: Date,
+        default: null
+    },
+    tags: {
+        type: [String],
+        default: []
+    },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -39,6 +45,11 @@ const TaskSchema = new mongoose.Schema({
 
 TaskSchema.pre("save", function (next) {
     this.updatedAt = Date.now();
+    next();
+});
+
+TaskSchema.pre("findOneAndUpdate", function (next) {
+    this.set({ updatedAt: Date.now() });
     next();
 });
 
