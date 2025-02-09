@@ -2,8 +2,35 @@
     --padding: 4rem;
     background-color: #F7CFD8;
     color: #111;
-    width: calc(80% - var(--padding));
-    padding: 1rem var(--padding);
-    height: auto;
+    width: 100%;
+    padding: 1rem 0;
     border-radius: 10px;
+}
+
+.info   {
+    width: 100%;
+}
+
+.buttons    {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.button {
+    height: 3.4rem;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    border-radius: .5rem;
+    background-color: #111;
+    color: #eee;
+    border: 1px solid transparent;
+    transition: border-color 0.25s;
+}
+
+.button:hover {
+    border-color: #646cff;
 }

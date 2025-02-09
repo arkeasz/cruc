@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Task from '../Task';
 import './index.css';
+import FormTask from '../FormTask';
 const API_URL = import.meta.env.VITE_API_URL;
 
 function Tasks()  {
@@ -29,7 +30,6 @@ function Tasks()  {
       fetchData()
     }, []);
 
-    console.log(API_URL)
     const addTask = async () => {
       if (!title || !description) return alert("Title and description are required");
       try {
@@ -73,22 +73,14 @@ function Tasks()  {
 
     return (
       <>
-        <div>
-          <div>
-            <input
-              type="text"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            <button onClick={addTask}>➕ Agregar</button>
-          </div>
+        <div className='section-tasks'>
+          <FormTask
+            title={title}
+            description={description}
+            setTitle={setTitle}
+            setDescription={setDescription}
+            addTask={addTask}
+          />
           <div className='tasks'>
               {
                 data.length === 0

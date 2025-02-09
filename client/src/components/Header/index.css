@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Galdeano&family=Gasoek+One&display=swap');
+
+header {
+    font-size: 2rem;
+    font-family: "Gasoek One", serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #111;
+}
