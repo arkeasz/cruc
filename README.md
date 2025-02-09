@@ -28,7 +28,7 @@ Make sure you have installed:
 ### Backend Setup
 1. Navigate to the backend directory:
    ```bash
-   cd backend
+   cd api
    ```
 2. Install dependencies:
    ```bash
@@ -37,8 +37,7 @@ Make sure you have installed:
 3. Create a `.env` file in the backend root and set the environment variables:
    ```env
    MONGO_URI=your_mongodb_connection
-   PORT=5000
-   JWT_SECRET=your_secret_key
+   PORT=3000
    ```
 4. Start the server:
    ```bash
@@ -48,7 +47,7 @@ Make sure you have installed:
 ### Frontend Setup
 1. Navigate to the frontend directory:
    ```bash
-   cd frontend
+   cd client
    ```
 2. Install dependencies:
    ```bash
